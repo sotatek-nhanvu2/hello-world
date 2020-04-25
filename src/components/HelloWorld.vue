@@ -20,13 +20,29 @@
     methods: {
       onClickChild(data) {
         this.data = data;
-        this.convertDataToTree();
+        this.createMaps();
       },
-      convertDataToTree() {
+      createMaps() {
+        var maps = {};
         var lines = this.data.value.split('\n');
-        for (var j = 0; j < lines.length; j++) {
-          console.log('Line ' + j + ' is ' + lines[j])
+        for (let j = 0; j < lines.length; j++) {
+          let parts = lines[j].split(':');
+          let father = parts[0].trim();
+          if (!maps[father]) {
+            maps[father] = [];
+          }
+          if (parts.length < 2) {
+            maps[father].push([]);
+          } else {
+            let childs = parts[1].split(',');
+            for (let k = 0; k < childs.length; k++) {
+              let child = childs[k].trim();
+              maps[father].push(child);
+            }
+          }
         }
+        console.log(maps);
+        this.data.maps = maps;
       }
     }
   }
