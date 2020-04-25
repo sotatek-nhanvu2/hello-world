@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
-    <raw-data class="raw-data"/>
-    <family-tree class="family-tree"/>
+    <raw-data class="raw-data" @clicked="onClickChild"/>
+    <family-tree class="family-tree" :value="data"/>
   </div>
 </template>
 
@@ -12,8 +12,15 @@ import RawData from "./RawData";
 export default {
   name: 'HelloWorld',
   components: {FamilyTree,RawData},
-  props: {
-    msg: String
+  data () {
+    return {
+      data: {}
+    }
+  },
+  methods: {
+    onClickChild (data) {
+      this.data = data;
+    }
   }
 }
 </script>

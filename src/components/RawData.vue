@@ -15,6 +15,7 @@
     },
     methods: {
       updateText() {
+        this.$emit('clicked', {value : this.currentValue});
       }
     }
   }
