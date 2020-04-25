@@ -21,6 +21,7 @@
       onClickChild(data) {
         this.data = data;
         this.createMaps();
+        this.createRelations();
       },
       createMaps() {
         var maps = {};
@@ -29,21 +30,41 @@
           let parts = lines[j].split(':');
           let father = parts[0].trim();
           if (!maps[father]) {
-            maps[father] = [];
+            maps[father] = {};
           }
-          if (parts.length < 2) {
-            maps[father].push([]);
-          } else {
+          if (parts.length > 1) {
             let childs = parts[1].split(',');
             for (let k = 0; k < childs.length; k++) {
               let child = childs[k].trim();
-              maps[father].push(child);
+              maps[father][child] = {};
             }
           }
         }
         console.log(maps);
         this.data.maps = maps;
-      }
+      },
+      createRelations () {
+        var maps = this.data.maps;
+        Object.keys(maps).forEach(function (parent) {
+          if (!maps[parent]) {
+            return;
+          }
+          // eslint-disable-next-line no-unused-vars
+          var childs = maps[parent];
+          // eslint-disable-next-line no-debugger
+          Object.keys(childs).forEach(function (child) {
+            if (!maps[child]) {
+              return;
+            }
+            // eslint-disable-next-line no-debugger
+            Object.keys(maps[child]).forEach(function (item) {
+              maps[parent][child][item] = maps[child][item];
+            });
+            delete maps[child];
+          });
+        });
+        this.data.relations = maps;
+      },
     }
   }
 </script>
