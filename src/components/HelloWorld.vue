@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
-    <family-tree class="family-tree"/>
     <raw-data class="raw-data"/>
+    <family-tree class="family-tree"/>
   </div>
 </template>
 
