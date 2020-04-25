@@ -1,12 +1,17 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
+    <family-tree class="family-tree"/>
+    <raw-data class="raw-data"/>
   </div>
 </template>
 
 <script>
+import FamilyTree from "./FamilyTree";
+import RawData from "./RawData";
+
 export default {
   name: 'HelloWorld',
+  components: {FamilyTree,RawData},
   props: {
     msg: String
   }
@@ -29,4 +34,13 @@ li {
 a {
   color: #42b983;
 }
+.hello {
+  display: flex
+}
+  .family-tree {
+    width: 50%
+  }
+  .raw-data {
+    width: 50%
+  }
 </style>
