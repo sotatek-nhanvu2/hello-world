@@ -11,7 +11,6 @@
     watch: {
       // eslint-disable-next-line no-unused-vars
       value: function (newValue, oldValue) {
-        console.log("value:\t" + newValue.value);
       }
     }
   }
