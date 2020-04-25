@@ -10,7 +10,17 @@
     props: ["value"],
     watch: {
       // eslint-disable-next-line no-unused-vars
-      value: function (newValue, oldValue) {
+      'value.relations': function (newValue, oldValue) {
+        // eslint-disable-next-line no-debugger
+        Object.keys(newValue).forEach(function (root) {
+          let tree = newValue[root];
+          this.buildTree(root, tree);
+        });
+      }
+    },
+    methods: {
+      buildTree(root, tree) {
+
       }
     }
   }
