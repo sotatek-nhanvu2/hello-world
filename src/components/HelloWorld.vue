@@ -45,6 +45,10 @@
       },
       createRelations () {
         var maps = this.data.maps;
+        this.data.relations = this.sort(maps);
+      },
+      sort(maps) {
+        let count = 0;
         Object.keys(maps).forEach(function (parent) {
           if (!maps[parent]) {
             return;
@@ -59,12 +63,16 @@
             // eslint-disable-next-line no-debugger
             Object.keys(maps[child]).forEach(function (item) {
               maps[parent][child][item] = maps[child][item];
+              count++;
             });
             delete maps[child];
           });
         });
-        this.data.relations = maps;
-      },
+        if (count === 0) {
+          return maps;
+        }
+        return this.sort(maps);
+      }
     }
   }
 </script>
