@@ -3,8 +3,8 @@
     Family tree
     <canvas id="c"></canvas>
     <fabric-canvas>
-      <fabric-circle :id="3"></fabric-circle>
-      <fabric-circle :id="2"></fabric-circle>
+      <fabric-rectangle :id="3"></fabric-rectangle>
+      <fabric-rectangle :id="2"></fabric-rectangle>
     </fabric-canvas>
   </div>
 </template>
@@ -17,7 +17,7 @@
     props: ["value"],
     components: {
       FabricCanvas: vueFabricWrapper.FabricCanvas,
-      FabricCircle: vueFabricWrapper.FabricCircle
+      FabricRectangle: vueFabricWrapper.FabricRectangle
     },
     data () {
       return {
