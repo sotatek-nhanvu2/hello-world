@@ -1,53 +1,17 @@
 <template>
   <div>
     Family tree
-    <fabric-canvas :height="400" :width="400">
-      <fabric-line :id="'headToBody'" :x1="headPosLeft" :y1="headPosTop" :x2="bodyPosLeft" :y2="bodyPosTop" :fill="'red'" :stroke="'red'" :strokeWidth="5" :selectable="false" :evented="false" :originX="'center'" :originY="'center'"></fabric-line>
-      <fabric-line :id="'bodyToWaist'" :x1="bodyPosLeft" :y1="bodyPosTop" :x2="waistPosLeft" :y2="waistPosTop" :fill="'red'" :stroke="'red'" :strokeWidth="5" :selectable="false" :evented="false" :originX="'center'" :originY="'center'"></fabric-line>
-      <fabric-line :id="'bodyToLeftArm'" :x1="bodyPosLeft" :y1="bodyPosTop" :x2="leftHandPosLeft" :y2="leftHandPosTop" :fill="'red'" :stroke="'red'" :strokeWidth="5" :selectable="false" :evented="false" :originX="'center'" :originY="'center'"></fabric-line>
-      <fabric-line :id="'bodyToRightArm'" :x1="bodyPosLeft" :y1="bodyPosTop" :x2="rightHandPosLeft" :y2="rightHandPosTop" :fill="'red'" :stroke="'red'" :strokeWidth="5" :selectable="false" :evented="false" :originX="'center'" :originY="'center'"></fabric-line>
-      <fabric-line :id="'waistToLeftFoot'" :x1="leftFootPosLeft" :y1="leftFootPosTop" :x2="waistPosLeft" :y2="waistPosTop" :fill="'red'" :stroke="'red'" :strokeWidth="5" :selectable="false" :evented="false" :originX="'center'" :originY="'center'"></fabric-line>
-      <fabric-line :id="'waistToRightFoot'" :x1="rightFootPosLeft" :y1="rightFootPosTop" :x2="waistPosLeft" :y2="waistPosTop" :fill="'red'" :stroke="'red'" :strokeWidth="5" :selectable="false" :evented="false" :originX="'center'" :originY="'center'"></fabric-line>
-      <fabric-rectangle :id="'head'" :left.sync="headPosLeft" :top.sync="headPosTop" :strokeWidth="5" :radius="12" :fill="'#fff'" :stroke="'#666'" :originX="'center'" :originY="'center'"></fabric-rectangle>
-      <fabric-rectangle :id="'body'" :left.sync="bodyPosLeft" :top.sync="bodyPosTop" :strokeWidth="5" :radius="12" :fill="'#fff'" :stroke="'#666'" :originX="'center'" :originY="'center'"></fabric-rectangle>
-      <fabric-rectangle :id="'waist'" :left.sync="waistPosLeft" :top.sync="waistPosTop" :strokeWidth="5" :radius="12" :fill="'#fff'" :stroke="'#666'" :originX="'center'" :originY="'center'"></fabric-rectangle>
-      <fabric-rectangle :id="'leftHand'" :left.sync="leftHandPosLeft" :top.sync="leftHandPosTop" :strokeWidth="5" :radius="12" :fill="'#fff'" :stroke="'#666'" :originX="'center'" :originY="'center'"></fabric-rectangle>
-      <fabric-rectangle :id="'rightHand'" :left.sync="rightHandPosLeft" :top.sync="rightHandPosTop" :strokeWidth="5" :radius="12" :fill="'#fff'" :stroke="'#666'" :originX="'center'" :originY="'center'"></fabric-rectangle>
-      <fabric-rectangle :id="'leftFoot'" :left.sync="leftFootPosLeft" :top.sync="leftFootPosTop" :strokeWidth="5" :radius="12" :fill="'#fff'" :stroke="'#666'" :originX="'center'" :originY="'center'"></fabric-rectangle>
-      <fabric-rectangle :id="'rightFoot'" :left.sync="rightFootPosLeft" :top.sync="rightFootPosTop" :strokeWidth="5" :radius="12" :fill="'#fff'" :stroke="'#666'" :originX="'center'" :originY="'center'"></fabric-rectangle>
-    </fabric-canvas>
+    <canvas id="c" class="c"></canvas>
   </div>
 </template>
 
 <script>
-  import vueFabricWrapper from "vue-fabric-wrapper";
-
   export default {
     name: "FamilyTree",
     props: ["value"],
-    components: {
-      FabricCanvas: vueFabricWrapper.FabricCanvas,
-      FabricRectangle: vueFabricWrapper.FabricRectangle,
-      FabricLine: vueFabricWrapper.FabricLine
-    },
+    components: {},
     data() {
-      return {
-        leftHandPosLeft: 175,
-        leftFootPosLeft: 200,
-        headPosLeft: 250,
-        bodyPosLeft: 250,
-        waistPosLeft: 250,
-        rightFootPosLeft: 300,
-        rightHandPosLeft: 325,
-
-        headPosTop: 50,
-        bodyPosTop: 150,
-        waistPosTop: 250,
-        leftHandPosTop: 250,
-        rightHandPosTop: 250,
-        leftFootPosTop: 350,
-        rightFootPosTop: 350
-      };
+      return {};
     },
     watch: {
       // eslint-disable-next-line no-unused-vars
@@ -61,13 +25,70 @@
       }
     },
     mounted() {
-
+      let mapScript = document.createElement('script');
+      mapScript.setAttribute('src', 'http://cdnjs.cloudflare.com/ajax/libs/fabric.js/3.6.3/fabric.min.js');
+      document.head.appendChild(mapScript);
     },
     methods: {
       // eslint-disable-next-line no-unused-vars
       buildTree(root, tree) {
+        var canvas = this.__canvas = new fabric.Canvas('c', { selection: false });
+        fabric.Object.prototype.originX = fabric.Object.prototype.originY = 'center';
 
+        var line = this.makeLine([250, 125, 250, 175]),
+          line2 = this.makeLine([250, 175, 250, 250]),
+          line3 = this.makeLine([250, 250, 300, 350]),
+          line4 = this.makeLine([250, 250, 200, 350]),
+          line5 = this.makeLine([250, 175, 175, 225]),
+          line6 = this.makeLine([250, 175, 325, 225]);
+
+        canvas.add(line, line2, line3, line4, line5, line6);
+
+        canvas.add(
+          this.makeCircle(line.get('x1'), line.get('y1'), null, line),
+          this.makeCircle(line.get('x2'), line.get('y2'), line, line2, line5, line6),
+          this.makeCircle(line2.get('x2'), line2.get('y2'), line2, line3, line4),
+          this.makeCircle(line3.get('x2'), line3.get('y2'), line3),
+          this.makeCircle(line4.get('x2'), line4.get('y2'), line4),
+          this.makeCircle(line5.get('x2'), line5.get('y2'), line5),
+          this.makeCircle(line6.get('x2'), line6.get('y2'), line6)
+        );
+        canvas.on('object:moving', function (e) {
+          var p = e.target;
+          p.line1 && p.line1.set({'x2': p.left, 'y2': p.top});
+          p.line2 && p.line2.set({'x1': p.left, 'y1': p.top});
+          p.line3 && p.line3.set({'x1': p.left, 'y1': p.top});
+          p.line4 && p.line4.set({'x1': p.left, 'y1': p.top});
+          canvas.renderAll();
+        });
       },
+      makeCircle(left, top, line1, line2, line3, line4) {
+        var c = new fabric.Circle({
+          left: left,
+          top: top,
+          strokeWidth: 5,
+          radius: 12,
+          fill: '#fff',
+          stroke: '#666'
+        });
+        c.hasControls = c.hasBorders = false;
+
+        c.line1 = line1;
+        c.line2 = line2;
+        c.line3 = line3;
+        c.line4 = line4;
+
+        return c;
+      },
+      makeLine(coords) {
+        return new fabric.Line(coords, {
+          fill: 'red',
+          stroke: 'red',
+          strokeWidth: 5,
+          selectable: false,
+          evented: false,
+        });
+      }
     }
   }
 </script>
