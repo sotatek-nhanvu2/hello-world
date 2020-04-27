@@ -33,12 +33,12 @@
     data() {
       return {
         leftHandPosLeft: 175,
-        rightHandPosLeft: 325,
         leftFootPosLeft: 200,
-        rightFootPosLeft: 300,
         headPosLeft: 250,
         bodyPosLeft: 250,
         waistPosLeft: 250,
+        rightFootPosLeft: 300,
+        rightHandPosLeft: 325,
 
         headPosTop: 50,
         bodyPosTop: 150,
