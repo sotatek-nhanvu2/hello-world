@@ -35,12 +35,12 @@
         var canvas = this.__canvas = new fabric.Canvas('c', { selection: false });
         fabric.Object.prototype.originX = fabric.Object.prototype.originY = 'center';
 
-        var line = this.makeLine([250, 125, 250, 175]),
-          line2 = this.makeLine([250, 175, 250, 250]),
-          line3 = this.makeLine([250, 250, 300, 350]),
-          line4 = this.makeLine([250, 250, 200, 350]),
-          line5 = this.makeLine([250, 175, 175, 225]),
-          line6 = this.makeLine([250, 175, 325, 225]);
+        var line = this.makeLine([150, 25, 150, 75]),
+          line2 = this.makeLine([150, 75, 150, 150]),
+          line3 = this.makeLine([150, 150, 200, 250]),
+          line4 = this.makeLine([150, 150, 100, 250]),
+          line5 = this.makeLine([150, 75, 75, 125]),
+          line6 = this.makeLine([150, 75, 225, 125]);
 
         canvas.add(line, line2, line3, line4, line5, line6);
 
