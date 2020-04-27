@@ -32,19 +32,20 @@
     },
     data() {
       return {
-        headPosLeft: 250,
-        headPosTop: 125,
-        bodyPosLeft: 250,
-        bodyPosTop: 175,
-        waistPosLeft: 250,
-        waistPosTop: 250,
         leftHandPosLeft: 175,
-        leftHandPosTop: 225,
         rightHandPosLeft: 325,
-        rightHandPosTop: 225,
         leftFootPosLeft: 200,
-        leftFootPosTop: 350,
         rightFootPosLeft: 300,
+        headPosLeft: 250,
+        bodyPosLeft: 250,
+        waistPosLeft: 250,
+
+        headPosTop: 50,
+        bodyPosTop: 150,
+        waistPosTop: 250,
+        leftHandPosTop: 250,
+        rightHandPosTop: 250,
+        leftFootPosTop: 350,
         rightFootPosTop: 350
       };
     },
