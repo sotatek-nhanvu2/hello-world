@@ -2,13 +2,23 @@
   <div>
     Family tree
     <canvas id="c"></canvas>
+    <fabric-canvas>
+      <fabric-circle :id="3"></fabric-circle>
+      <fabric-circle :id="2"></fabric-circle>
+    </fabric-canvas>
   </div>
 </template>
 
 <script>
+  import vueFabricWrapper from "vue-fabric-wrapper";
+
   export default {
     name: "FamilyTree",
     props: ["value"],
+    components: {
+      FabricCanvas: vueFabricWrapper.FabricCanvas,
+      FabricCircle: vueFabricWrapper.FabricCircle
+    },
     data () {
       return {
         rectWidth: 30,
