@@ -8,13 +8,13 @@
       <fabric-line :id="'bodyToRightArm'" :x1="bodyPosLeft" :y1="bodyPosTop" :x2="rightHandPosLeft" :y2="rightHandPosTop" :fill="'red'" :stroke="'red'" :strokeWidth="5" :selectable="false" :evented="false" :originX="'center'" :originY="'center'"></fabric-line>
       <fabric-line :id="'waistToLeftFoot'" :x1="leftFootPosLeft" :y1="leftFootPosTop" :x2="waistPosLeft" :y2="waistPosTop" :fill="'red'" :stroke="'red'" :strokeWidth="5" :selectable="false" :evented="false" :originX="'center'" :originY="'center'"></fabric-line>
       <fabric-line :id="'waistToRightFoot'" :x1="rightFootPosLeft" :y1="rightFootPosTop" :x2="waistPosLeft" :y2="waistPosTop" :fill="'red'" :stroke="'red'" :strokeWidth="5" :selectable="false" :evented="false" :originX="'center'" :originY="'center'"></fabric-line>
-      <fabric-circle :id="'head'" :left.sync="headPosLeft" :top.sync="headPosTop" :strokeWidth="5" :radius="12" :fill="'#fff'" :stroke="'#666'" :originX="'center'" :originY="'center'"></fabric-circle>
-      <fabric-circle :id="'body'" :left.sync="bodyPosLeft" :top.sync="bodyPosTop" :strokeWidth="5" :radius="12" :fill="'#fff'" :stroke="'#666'" :originX="'center'" :originY="'center'"></fabric-circle>
-      <fabric-circle :id="'waist'" :left.sync="waistPosLeft" :top.sync="waistPosTop" :strokeWidth="5" :radius="12" :fill="'#fff'" :stroke="'#666'" :originX="'center'" :originY="'center'"></fabric-circle>
-      <fabric-circle :id="'leftHand'" :left.sync="leftHandPosLeft" :top.sync="leftHandPosTop" :strokeWidth="5" :radius="12" :fill="'#fff'" :stroke="'#666'" :originX="'center'" :originY="'center'"></fabric-circle>
-      <fabric-circle :id="'rightHand'" :left.sync="rightHandPosLeft" :top.sync="rightHandPosTop" :strokeWidth="5" :radius="12" :fill="'#fff'" :stroke="'#666'" :originX="'center'" :originY="'center'"></fabric-circle>
-      <fabric-circle :id="'leftFoot'" :left.sync="leftFootPosLeft" :top.sync="leftFootPosTop" :strokeWidth="5" :radius="12" :fill="'#fff'" :stroke="'#666'" :originX="'center'" :originY="'center'"></fabric-circle>
-      <fabric-circle :id="'rightFoot'" :left.sync="rightFootPosLeft" :top.sync="rightFootPosTop" :strokeWidth="5" :radius="12" :fill="'#fff'" :stroke="'#666'" :originX="'center'" :originY="'center'"></fabric-circle>
+      <fabric-rectangle :id="'head'" :left.sync="headPosLeft" :top.sync="headPosTop" :strokeWidth="5" :radius="12" :fill="'#fff'" :stroke="'#666'" :originX="'center'" :originY="'center'"></fabric-rectangle>
+      <fabric-rectangle :id="'body'" :left.sync="bodyPosLeft" :top.sync="bodyPosTop" :strokeWidth="5" :radius="12" :fill="'#fff'" :stroke="'#666'" :originX="'center'" :originY="'center'"></fabric-rectangle>
+      <fabric-rectangle :id="'waist'" :left.sync="waistPosLeft" :top.sync="waistPosTop" :strokeWidth="5" :radius="12" :fill="'#fff'" :stroke="'#666'" :originX="'center'" :originY="'center'"></fabric-rectangle>
+      <fabric-rectangle :id="'leftHand'" :left.sync="leftHandPosLeft" :top.sync="leftHandPosTop" :strokeWidth="5" :radius="12" :fill="'#fff'" :stroke="'#666'" :originX="'center'" :originY="'center'"></fabric-rectangle>
+      <fabric-rectangle :id="'rightHand'" :left.sync="rightHandPosLeft" :top.sync="rightHandPosTop" :strokeWidth="5" :radius="12" :fill="'#fff'" :stroke="'#666'" :originX="'center'" :originY="'center'"></fabric-rectangle>
+      <fabric-rectangle :id="'leftFoot'" :left.sync="leftFootPosLeft" :top.sync="leftFootPosTop" :strokeWidth="5" :radius="12" :fill="'#fff'" :stroke="'#666'" :originX="'center'" :originY="'center'"></fabric-rectangle>
+      <fabric-rectangle :id="'rightFoot'" :left.sync="rightFootPosLeft" :top.sync="rightFootPosTop" :strokeWidth="5" :radius="12" :fill="'#fff'" :stroke="'#666'" :originX="'center'" :originY="'center'"></fabric-rectangle>
     </fabric-canvas>
   </div>
 </template>
@@ -27,7 +27,7 @@
     props: ["value"],
     components: {
       FabricCanvas: vueFabricWrapper.FabricCanvas,
-      FabricCircle: vueFabricWrapper.FabricCircle,
+      FabricRectangle: vueFabricWrapper.FabricRectangle,
       FabricLine: vueFabricWrapper.FabricLine
     },
     data() {
