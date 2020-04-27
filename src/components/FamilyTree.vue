@@ -30,9 +30,8 @@
       document.head.appendChild(mapScript);
     },
     methods: {
-      // eslint-disable-next-line no-unused-vars
       buildTree(root, tree) {
-        var canvas = this.__canvas = new fabric.Canvas('c', { selection: false });
+        var canvas = new fabric.Canvas('c', { selection: false });
         fabric.Object.prototype.originX = fabric.Object.prototype.originY = 'center';
 
         var line = this.makeLine([150, 25, 150, 75]),
