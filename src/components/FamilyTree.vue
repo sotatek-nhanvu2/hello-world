@@ -51,8 +51,10 @@
             nextLines[sub] = parents[parent][sub];
           });
         });
-        this.treeText += titles.join("\t\t") + "\n";
-        this.buildVertical(nextLines);
+        this.treeText += titles.join("\t\t") + "\n\n";
+        if (Object.keys(nextLines).length > 0) {
+          this.buildVertical(nextLines);
+        }
       }
     }
   }
