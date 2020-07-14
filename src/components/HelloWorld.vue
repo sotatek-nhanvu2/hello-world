@@ -14,7 +14,9 @@
     components: {FamilyTree, RawData},
     data() {
       return {
-        data: {}
+        data: {
+          countReplace: 0
+        }
       }
     },
     methods: {
@@ -48,26 +50,37 @@
         this.data.relations = this.sort(maps);
       },
       sort(maps) {
-        let count = 0;
+        var self = this;
+        this.countReplace = 0;
         Object.keys(maps).forEach(function (parent) {
           if (!maps[parent]) {
             return;
           }
-          // eslint-disable-next-line no-unused-vars
           var childs = maps[parent];
-          // eslint-disable-next-line no-debugger
-          Object.keys(childs).forEach(function (child) {
-            if (!maps[child]) {
-              return;
+          maps[parent] = self.replace(childs, maps, maps[parent]);
+        });
+        if (this.countReplace > 0) {
+          this.sort(maps);
+        }
+        return maps;
+      },
+      replace (childs, compares, destination) {
+        var self = this;
+        Object.keys(childs).forEach(function (child) {
+          if (compares[child]) {
+            destination[child] = compares[child];
+            delete compares[child];
+            self.countReplace++;
+          }
+          Object.keys(destination[child]).forEach(function (subChild) {
+            if (compares[subChild]) {
+              destination[child][subChild] = compares[subChild];
+              delete compares[subChild];
+              self.countReplace++;
             }
-            maps[parent][child] = maps[child];
-            delete maps[child];
           });
         });
-        if (count === 0) {
-          return maps;
-        }
-        return this.sort(maps);
+        return destination;
       }
     }
   }
