@@ -1,8 +1,8 @@
 <template>
-  <div class="hello">
-    <raw-data class="raw-data" @clicked="onClickChild"/>
-    <family-tree class="family-tree" :value="data"/>
-  </div>
+    <div class="hello">
+        <raw-data class="raw-data" @clicked="onClickChild"/>
+        <family-tree class="family-tree" :value="tree"/>
+    </div>
 </template>
 
 <script>
@@ -14,9 +14,9 @@
     components: {FamilyTree, RawData},
     data() {
       return {
-        data: {
-          countReplace: 0
-        }
+        maps: {},
+        tree: {},
+        countReplace: 0,
       }
     },
     methods: {
@@ -43,42 +43,28 @@
           }
         }
         console.log(maps);
-        this.data.maps = maps;
+        this.maps = maps;
       },
-      createRelations () {
-        var maps = this.data.maps;
-        this.data.relations = this.sort(maps);
+      createRelations() {
+        this.sort();
       },
-      sort(maps) {
+      sort() {
+        var maps = Object.keys(this.maps);
+        var root = maps[0];
+        this.tree[root] = this.maps[root];
+        this.tree[root] = this.recursiveArray(this.tree[root]);
+      },
+      recursiveArray(destination) {
         var self = this;
-        this.countReplace = 0;
-        Object.keys(maps).forEach(function (parent) {
-          if (!maps[parent]) {
-            return;
-          }
-          var childs = maps[parent];
-          maps[parent] = self.replace(childs, maps, maps[parent]);
-        });
-        if (this.countReplace > 0) {
-          this.sort(maps);
+        if (!destination instanceof Object) {
+          return destination;
         }
-        return maps;
-      },
-      replace (childs, compares, destination) {
-        var self = this;
-        Object.keys(childs).forEach(function (child) {
-          if (compares[child]) {
-            destination[child] = compares[child];
-            delete compares[child];
-            self.countReplace++;
+        var subs = Object.keys(destination);
+        subs.forEach((sub) => {
+          if (self.maps[sub]) {
+            destination[sub] = self.maps[sub];
           }
-          Object.keys(destination[child]).forEach(function (subChild) {
-            if (compares[subChild]) {
-              destination[child][subChild] = compares[subChild];
-              delete compares[subChild];
-              self.countReplace++;
-            }
-          });
+          destination[sub] = self.recursiveArray(destination[sub]);
         });
         return destination;
       }
@@ -88,33 +74,33 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  h3 {
-    margin: 40px 0 0;
-  }
+    h3 {
+        margin: 40px 0 0;
+    }
 
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
 
-  li {
-    display: inline-block;
-    margin: 0 10px;
-  }
+    li {
+        display: inline-block;
+        margin: 0 10px;
+    }
 
-  a {
-    color: #42b983;
-  }
+    a {
+        color: #42b983;
+    }
 
-  .hello {
-    display: flex
-  }
+    .hello {
+        display: flex
+    }
 
-  .family-tree {
-    width: 50%
-  }
+    .family-tree {
+        width: 50%
+    }
 
-  .raw-data {
-    width: 50%
-  }
+    .raw-data {
+        width: 50%
+    }
 </style>
