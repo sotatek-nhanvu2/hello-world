@@ -88,14 +88,14 @@
     }
 
     .hello {
-        display: flex
+        display: block;
     }
 
     .family-tree {
-        width: 50%
+        width: 100%
     }
 
     .raw-data {
-        width: 50%
+        width: 100%
     }
 </style>

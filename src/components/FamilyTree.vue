@@ -1,8 +1,6 @@
 <template>
   <div>
-    Family tree
     <textarea :value="treeText" class="tree-text"></textarea>
-    <canvas id="c" class="c"></canvas>
   </div>
 </template>
 
@@ -39,7 +37,7 @@
         this.treeText += padding + root + "\n";
         var self = this;
         Object.keys(tree).forEach(function (sub) {
-          var nextPadding = padding + "\t";
+          var nextPadding = padding + "\t\t";
           self.buildTree(sub, tree[sub], nextPadding);
         });
       }
@@ -49,7 +47,7 @@
 
 <style scoped>
 .tree-text {
-  height: 300px;
-  width: 300px;
+  height: 500px;
+  width: 100%;
 }
 </style>
