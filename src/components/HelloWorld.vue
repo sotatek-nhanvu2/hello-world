@@ -56,11 +56,7 @@
       },
       recursiveArray(destination) {
         var self = this;
-        if (!destination instanceof Object) {
-          return destination;
-        }
-        var subs = Object.keys(destination);
-        subs.forEach((sub) => {
+        Object.keys(destination).forEach((sub) => {
           if (self.maps[sub]) {
             destination[sub] = self.maps[sub];
           }
