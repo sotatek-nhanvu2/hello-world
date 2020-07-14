@@ -18,7 +18,7 @@
     },
     watch: {
       // eslint-disable-next-line no-unused-vars
-      'value.relations': function (newValue, oldValue) {
+      'value': function (newValue, oldValue) {
         var self = this;
         this.treeText = "";
         // eslint-disable-next-line no-debugger

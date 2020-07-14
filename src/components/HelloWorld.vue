@@ -1,7 +1,7 @@
 <template>
     <div class="hello">
         <raw-data class="raw-data" @clicked="onClickChild"/>
-        <family-tree class="family-tree" :value="tree"/>
+        <family-tree class="family-tree" :value="relations"/>
     </div>
 </template>
 
@@ -16,6 +16,7 @@
       return {
         maps: {},
         tree: {},
+        relations: {},
         countReplace: 0,
       }
     },
@@ -46,13 +47,11 @@
         this.maps = maps;
       },
       createRelations() {
-        this.sort();
-      },
-      sort() {
         var maps = Object.keys(this.maps);
         var root = maps[0];
         this.tree[root] = this.maps[root];
         this.tree[root] = this.recursiveArray(this.tree[root]);
+        this.relations = this.tree;
       },
       recursiveArray(destination) {
         var self = this;
