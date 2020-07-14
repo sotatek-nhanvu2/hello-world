@@ -60,11 +60,7 @@
             if (!maps[child]) {
               return;
             }
-            // eslint-disable-next-line no-debugger
-            Object.keys(maps[child]).forEach(function (item) {
-              maps[parent][child][item] = maps[child][item];
-              count++;
-            });
+            maps[parent][child] = maps[child];
             delete maps[child];
           });
         });
